@@ -33,9 +33,18 @@ var TodoItemsView = Backbone.View.extend({
 	removeItemFromCollection: function(todoitem){
 		this.$el.find('#'+todoitem.cid).remove();
 	},
-	toggleItems:function(){
+	toggleItems:function(eventTarget){
 		this.model.each(function(todoitem){
-			todoitem.toggle();
-		})
+			var isCompleted = todoitem.get('completed');
+			if(eventTarget[0].prop('checked')){
+				if(!isCompleted){
+					todoitem.toggle();
+				}
+			}else{
+				if(isCompleted){
+					todoitem.toggle();
+				}
+			}
+		});
 	}
 });

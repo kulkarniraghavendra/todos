@@ -18,7 +18,7 @@ var TodoItemTextBox = Backbone.View.extend({
 			this.$("#newTodoItem").val("");
 		}
 	},
-	toggleAllTodos: function(){
-		this.bus.trigger("toggleAllTodoItems");
+	toggleAllTodos: function(event){
+		this.bus.trigger("toggleAllTodoItems",[$(event.currentTarget)]);
 	}
 });

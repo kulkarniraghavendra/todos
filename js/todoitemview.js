@@ -22,7 +22,9 @@ var TodoItemView = Backbone.View.extend({
 		return this;
 	},
 	toggleCompleteCheck: function(){
+		debugger;
 		this.model.toggle();
+		console.log(this.model.collection.completed());
 	},
 	removeTodoItem: function(){
 		this.model.destroy();
