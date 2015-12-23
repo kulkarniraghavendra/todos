@@ -8,6 +8,6 @@ var TodoItem = Backbone.Model.extend({
 		}
 	},
 	toggle: function(){
-		this.set("completed",!this.get("completed"));
+		this.save("completed",!this.get("completed"));
 	}
 });

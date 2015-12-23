@@ -20,7 +20,6 @@
             <ul id="todoItems"></ul>
         </section>
         <footer id="info">
-            <p>Double-click to edit a todo</p>
             <p>&nbsp;<a href="https://github.com">@Raghavendra</a>&nbsp;</p>
         </footer>
         <!-- ----------------------------------------------scripts----------------------------------------------------- -->
@@ -34,16 +33,37 @@
                 <input type="checkbox" id="toggle" name="isCompleteCheck" <%= completed ? 'checked' : '' %> />
                 <%= description %>
             </label>
+            <input class="edit" value="<%= description %>">
             <button class="destroy"></button>
+            <button class="edit-pen"></button>
+        </script>
+        <script type="text/template" id="stats-template">
+            <span id="todo-count"><strong><%= remaining %></strong> <%= remaining === 1 ? 'item' : 'items' %> left</span>
+            <ul id="filters">
+                <li>
+                    <a class="selected" href="#/">All</a>
+                </li>
+                <li>
+                    <a href="#/active">Active</a>
+                </li>
+                <li>
+                    <a href="#/completed">Completed</a>
+                </li>
+            </ul>
+            <% if (completed) { %>
+            <button id="clear-completed">Clear completed (<%= completed %>)</button>
+            <% } %>
         </script>
         <script type="text/javascript" src="js/lib/jquery-min.js"></script>
         <script type="text/javascript" src="js/lib/underscore-min.js"></script>
         <script type="text/javascript" src="js/lib/backbone-min.js"></script>
+        <script type="text/javascript" src="js/lib/backbone.localStorage.js"></script>
+        <script type="text/javascript" src="js/todoModel.js"></script>
+        <script type="text/javascript" src="js/todoCollection.js"></script>
+        <script type="text/javascript" src="js/todoItemView.js"></script>
+        <script type="text/javascript" src="js/todoItemsView.js"></script>
+        <script type="text/javascript" src="js/todoItemTextBoxView.js"></script>
+        <script type="text/javascript" src="js/todoStatsView.js"></script>
         <script type="text/javascript" src="js/main.js"></script>
-        <script type="text/javascript" src="js/todoitem.js"></script>
-        <script type="text/javascript" src="js/todoitems.js"></script>
-        <script type="text/javascript" src="js/todoitemview.js"></script>
-        <script type="text/javascript" src="js/todoitemsview.js"></script>
-        <script type="text/javascript" src="js/todoitemTextBoxView.js"></script>
     </body>
 </html>

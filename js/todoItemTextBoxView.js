@@ -2,6 +2,8 @@ var TodoItemTextBox = Backbone.View.extend({
 	el: "#header",
 	initialize:function(options){
 		this.bus = options.bus;
+		this.collection = options.model;
+		this.bus.on('markAllItems',this.markAllItemsDone,this);
 	},
 	events:{
 		"keypress": "onPressAddTodoItem",
@@ -18,7 +20,11 @@ var TodoItemTextBox = Backbone.View.extend({
 			this.$("#newTodoItem").val("");
 		}
 	},
-	toggleAllTodos: function(event){
-		this.bus.trigger("toggleAllTodoItems",[$(event.currentTarget)]);
+	toggleAllTodos: function(){
+		this.bus.trigger("toggleAllTodoItems",this.$el.find('#toggle-all').prop('checked'));
+	},
+	markAllItemsDone: function(){
+		var completeItemsCount = this.collection.completed().length;
+		this.$el.find('#toggle-all').prop('checked',completeItemsCount != 0 ? completeItemsCount === this.collection.length : false);
 	}
 });

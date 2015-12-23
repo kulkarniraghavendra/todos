@@ -5,20 +5,28 @@ var TodoItemsView = Backbone.View.extend({
 		if(!(options && options.model)){
 			throw new Error("Invalid collection");
 		}
-		this.model.on('add',this.addItemToCollection,this);
-		this.model.on('remove',this.removeItemFromCollection,this);
+		this.collection = options.model;
+		this.collection.on('add',this.addItemToCollection,this);
+		this.collection.on('reset',this.addAll,this);
+		//this.model.on('remove',this.removeItemFromCollection,this);
 		this.bus.on("addTodoItemOnEnterKey",this.addTodoItem,this);
 		this.bus.on("toggleAllTodoItems",this.toggleItems,this);
 	},
 	render:function(){
+		try{
+			this.collection.fetch();
+		} catch(err){
+			console.log("ended in "+err);
+		}
 		return this;
 	},
 	addTodoItem: function(value){
 		if(!!$.trim(value)){
 			var newTodoItemModel =  new TodoItem({
-				"description":value
+				"description":value,
+				"order": this.collection.nextOrder()
 			});
-			this.model.add(newTodoItemModel);
+			this.model.create(newTodoItemModel);
 		}else{
 			$("#errorMsg").html("Error: Please enter valid todo task!!!").css('display','block');
 			setTimeout(function(){
@@ -27,15 +35,19 @@ var TodoItemsView = Backbone.View.extend({
 		}
 	},
 	addItemToCollection: function(todoitem){
-		var newTodoItemView = new TodoItemView({model:todoitem});
+		var newTodoItemView = new TodoItemView({model:todoitem,bus:this.bus});
 		this.$el.append(newTodoItemView.render().$el);
 	},
-	removeItemFromCollection: function(todoitem){
+	addAll: function() {
+	    this.$('#todoItems').html('');
+	    this.collection.each(this.addItemToCollection, this);
+  	},
+	/*removeItemFromCollection: function(todoitem){
 		this.$el.find('#'+todoitem.cid).remove();
-	},
-	toggleItems:function(eventTarget){
-		this.model.each(function(todoitem){
-			var isCompleted = todoitem.get('completed');
+	},*/
+	toggleItems:function(completed){
+		this.collection.each(function(todoitem){
+			/*var isCompleted = todoitem.get('completed');
 			if(eventTarget[0].prop('checked')){
 				if(!isCompleted){
 					todoitem.toggle();
@@ -44,7 +56,8 @@ var TodoItemsView = Backbone.View.extend({
 				if(isCompleted){
 					todoitem.toggle();
 				}
-			}
+			}*/
+			todoitem.save({completed});
 		});
 	}
 });
