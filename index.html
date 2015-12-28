@@ -29,10 +29,8 @@
             <input type="text" autofocus id="newTodoItem" placeholder="What's the next task??"></input>
         </script>
         <script type="text/template" id="todo-item-template">
-            <label>
-                <input type="checkbox" id="toggle" name="isCompleteCheck" <%= completed ? 'checked' : '' %> />
-                <%= description %>
-            </label>
+            <input type="checkbox" id="toggle" name="isCompleteCheck" <%= completed ? 'checked' : '' %> />
+            <label><%- description %></label>
             <input class="edit" value="<%= description %>">
             <button class="destroy"></button>
             <button class="edit-pen"></button>
@@ -40,13 +38,13 @@
         <script type="text/template" id="stats-template">
             <span id="todo-count"><strong><%= remaining %></strong> <%= remaining === 1 ? 'item' : 'items' %> left</span>
             <ul id="filters">
-                <li>
+                <li class="all">
                     <a class="selected" href="#/">All</a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="#/active">Active</a>
                 </li>
-                <li>
+                <li class="complete">
                     <a href="#/completed">Completed</a>
                 </li>
             </ul>
@@ -64,6 +62,7 @@
         <script type="text/javascript" src="js/todoItemsView.js"></script>
         <script type="text/javascript" src="js/todoItemTextBoxView.js"></script>
         <script type="text/javascript" src="js/todoStatsView.js"></script>
+        <script type="text/javascript" src="js/todoRouter.js"></script>
         <script type="text/javascript" src="js/main.js"></script>
     </body>
 </html>

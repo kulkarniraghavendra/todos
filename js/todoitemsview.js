@@ -21,7 +21,8 @@ var TodoItemsView = Backbone.View.extend({
 		return this;
 	},
 	addTodoItem: function(value){
-		if(!!$.trim(value)){
+		value = $.trim(value);
+		if(!!value){
 			var newTodoItemModel =  new TodoItem({
 				"description":value,
 				"order": this.collection.nextOrder()

@@ -4,7 +4,7 @@ p { font-size: 24px; }
 body {
 	padding: 40px;
 	line-height: 1.4em;
-	background: #eaeaea url('../imgs/bg.png');
+	background: url("../imgs/bg.png");
 	color: #4d4d4d;
 	width: 550px;
 	margin: 0 auto;
@@ -46,26 +46,6 @@ input#toggle {
     padding-left: 50px;
     display: none;
     background: #ffffff;
-}
-
-span#errorMsg:before {
-    content: ' ';
-    border-left: 3px double skyblue;
-    position: relative;
-    left: -11px;
-    top: -11px;
-    line-height: 44px;
-    font-size: 20px;
-}
-
-span#errorMsg:after {
-    content: ' ';
-    border-left: 3px double skyblue;
-    position: relative;
-    left: -332px;
-    top: 11px;
-    line-height: 44px;
-    font-size: 20px;
 }
 
 #todoapp {
@@ -125,22 +105,9 @@ span#errorMsg:after {
 }
 
 #todoItems > li {
-	padding: 10px;
-	/* border-right: 1px solid #ccc; */
 	border-bottom: 1px solid #ccc;
 	list-style: none;
 	background: #ffffff;
-}
-
-
-li.todo-item:before {
-    content: ' ';
-    border-left: 3px double skyblue;
-    position: relative;
-    left: 28.9px;
-    top: -21px;
-    line-height: 44px;
-    font-size: 20px;
 }
 
 #todoItems > li >label {
@@ -167,10 +134,9 @@ li.todo-item:before {
 	position: relative;
 	padding: 10px;
 	width: 92.9%;
-	left: 39px;
+	left: 38.5px;
 	box-sizing: border-box;
 	border: none;
-	border-left: 3px double skyblue;
 	outline: none;
 }
 
@@ -232,23 +198,31 @@ li.todo-item:before {
 
 #todoItems li.editing .edit {
 	display: block;
-    position: absolute;
-    left: 48px;
-    height: 52px;
-    width: 90%;
-    box-sizing: border-box;
-    top: 5px;
-    z-index: 2;
+	padding: 8px;
+	position: relative;
+	left: 45px;
+	height: 55px;
+	margin: 5px;
+	width: 89.5%;
+	box-sizing: border-box;
+	z-index: 2;
 }
+
+#todoItems li.editing label {
+	display: none;
+}
+
+#todoItems li.editing #toggle {
+	visibility: hidden;
+}	
 
 #todoItems li #toggle {
 	text-align: center;
-	/* display: inline-block;*/
-	width: 30px;
-	height: 30px;
-	position: relative;
+	width: 40px;
+	background: none;
+	height: 40px;
+	position: absolute;
 	top: 0px;
-	left: -7px;
 	bottom: 0;
 	margin: auto 0;/* Mobile Safari */
 	border: none;
@@ -275,12 +249,14 @@ li.todo-item:before {
 }
 
 #todoItems li > label {
-	/* word-break: break-all; */
-	white-space: normal;
+	word-break: break-word;
+	white-space: pre;
 	text-align: left;
 	position: relative;
-	width: 90%;
-	display: inline-block;
+	width: 73%;
+	margin-left: 45px;
+	padding: 20px;
+	/* display: inline-block; */
 	line-height: 1.2;
 	-webkit-transition: color 0.4s;
 	transition: color 0.4s;
@@ -320,16 +296,6 @@ li.todo-item:before {
 
 #todoItems li:hover .destroy {
 	display: block;
-}
-
-#todoItems li:after {
-    content: ' ';
-    border-left: 3px double skyblue;
-    position: relative;
-    left: -454.9px;
-    top: 21px;
-    line-height: 44px;
-    font-size: 20px;
 }
 
 #todoItems li .edit {
@@ -456,4 +422,20 @@ li.todo-item:before {
 
 #todoItems li:hover .edit-pen {
 	display: block;
+}
+
+#todoapp:before {
+    content: '';
+    border-left: 1px solid skyblue;
+    border-right: 1px solid skyblue;
+    width: 2px;
+    position: absolute;
+    top: 0;
+    left: 40px;
+    height: 100%;
+    z-index: 3;
+}
+
+.hidden {
+	display: none;
 }
